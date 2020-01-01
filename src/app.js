@@ -9,5 +9,8 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+const indexRoute = require('./routes/index-route');
+
+app.get('/', indexRoute);
 
 module.exports = app;
