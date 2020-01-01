@@ -1,0 +1,14 @@
+{
+  "name": "usedstuff",
+  "version": "1.0.0",
+  "description": "'A place to trade used things and make sure that is a good deal'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Henrique Detoni",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
