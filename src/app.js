@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+app.set('view engine', 'ejs');
+
 const indexRoute = require('./routes/index-route');
 
 app.get('/', indexRoute);
