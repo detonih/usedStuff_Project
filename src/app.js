@@ -12,7 +12,12 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'ejs');
 
 const indexRoute = require('./routes/index-route');
+const loginRoute = require('./routes/login-route');
+const createAccountRoute = require('./routes/createAccount-route')
 
-app.get('/', indexRoute);
+
+app.use('/', indexRoute);
+app.use('/login', loginRoute);
+app.use('/createaccount', createAccountRoute);
 
 module.exports = app;
