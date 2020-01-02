@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config');
 
-mongoose.connect(config.connectionString);
+mongoose.connect(config.connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json({
     limit: '5mb'
