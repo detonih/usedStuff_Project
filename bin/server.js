@@ -12,7 +12,7 @@ const server = http.createServer(app);
 server.listen(port);
 
 server.on('error', onError);
-server.on('listening', onListening);
+server.on('listening', onListening); 
 
 function normalizePort(val) {
     const port = parseInt(val, 10);
