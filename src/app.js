@@ -20,7 +20,7 @@ const loginRoute = require('./routes/login-route');
 const createAccountRoute = require('./routes/createAccount-route')
 
 
-app.use('/', indexRoute);
+app.use('/index', indexRoute);
 app.use('/login', loginRoute);
 app.use('/createaccount', createAccountRoute);
 
