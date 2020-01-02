@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose');
-const User = require('../models/createAccount-model')
+const User = require('../models/createaccount-model')
 
 //Find all users
 exports.get = async (req) => {
@@ -15,7 +15,7 @@ exports.create = async (data) => {
     await user.save();
 };
 
-exports.update = async (id, data) => {
+/* exports.update = async (id, data) => {
     await User.User
         .findByIdAndUpdate(id, {
             $set: {
@@ -24,4 +24,4 @@ exports.update = async (id, data) => {
                 password: data.password
             }
         });
-};
+}; */

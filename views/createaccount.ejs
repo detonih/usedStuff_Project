@@ -9,7 +9,36 @@
 <body>
     <div>
         <h1>Create an account</h1>
-        <form action="/" method="post"></form>
+        <div id="createaccount">
+            <form action="/createaccount" method="POST">
+                <h1>Create Account</h1>
+                <p>
+                    <label for="name_register">Your name: </label>
+                    <input type="text" name="name_register" id="name_register" class="form-control" placeholder="Enter your full name" required>
+                </p>
+
+                <p>
+                    <label for="email_register">Your email adress: </label>
+                    <input type="email" name="email_register" id="email_register" class="form-control" placeholder="Enter your email adress" required>
+                </p>
+
+                <p>
+                    <label for="password_register">Enter a new password: </label>
+                    <input type="password" name="password_register" id="password_register" class="form-control" placeholder="Enter a valid password" required>
+                </p>
+
+                <p>
+                    <input type="submit" value="register">
+                </p>
+
+                <p>
+                    Already have an account? <br>
+                    <a href="http://localhost:3000/login"><input type="button" value="Login"></a>
+                </p>
+
+            </form>
+        </div>
+       
     </div>
 </body>
 </html>

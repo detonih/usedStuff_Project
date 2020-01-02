@@ -1,6 +1,6 @@
 'use strict'
 
-const repository = require('../repositories/createAccount-repository');
+const repository = require('../repositories/createaccount-repository');
 
 exports.get = async (req, res, next) => {
     try {
@@ -15,11 +15,16 @@ exports.get = async (req, res, next) => {
 };
 
 exports.post = async (req, res, next) => {
+        const getName = req.body.name_register;
+        const getEmail = req.body.email_register;
+        const getPassword = req.body.password_register;
+        console.log(getName)
     try {
+        
         await repository.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
+            name: getName,
+            email: getEmail,
+            password: getPassword,
             roles: ['user']
         });
 
@@ -33,7 +38,7 @@ exports.post = async (req, res, next) => {
         });
     }
 };
-
+/* 
 exports.put = async (req, res, next) => {
     try {
         await respository.update(req.params.is, req.body);
@@ -45,4 +50,4 @@ exports.put = async (req, res, next) => {
             message: 'Error while update account'
         });
     }
-};
+}; */
