@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const config = require('./config');
+
+mongoose.connect(config.connectionString);
 
 app.use(bodyParser.json({
     limit: '5mb'
