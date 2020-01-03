@@ -25,19 +25,22 @@ exports.authenticate = async (req, res, next) => {
             name: user.name,
             id: user._id,
             roles: user.roles
-        })/* .then(() => {
-            res.redirect('/profile');
-        }); */
+        });
 
-        console.log(token)
         res.status(200).send({
             token: token,
             data: {
             email: user.email,
-            name: user.name
+            name: user.name,
+            id: user.id
             }
         });
-        //res.redirect('/profile');
+        
+        //res.redirect('profile')
+       
+        
+        
+        console.log(token)
 
     } catch (e) {
         console.log(e)
