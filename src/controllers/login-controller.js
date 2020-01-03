@@ -21,30 +21,17 @@ exports.authenticate = async (req, res, next) => {
         }
 
         const token = await authService.generateToken({
-            email: user.email,
-            name: user.name,
             id: user._id,
+            name: user.name,
+            email: user.email,
             roles: user.roles
         });
-
-        
-        await res.redirect('profile')
-        
-        console.log(token)
-        //return res.render(token)
-        
-        await res.status(200).send({
-            token: token,
-            data: {
-                email: user.email,
-                name: user.name,
-                id: user.id
-            }
-        });
-        
+        console.log(token + ' token login contrler');
+                
+        await res.render('profile');
 
     } catch (e) {
-        console.log(e)
+        console.log(e + 'outro problem')
         res.status(500).send({
             message: "Login fail"
         });

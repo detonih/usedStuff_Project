@@ -16,8 +16,8 @@ exports.decodeToken = async (token) => {
 // Intercept rotes
 exports.authorize = (req, res, next) => {
 
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
-
+    let token = req.body.token || req.body || req.query.token || req.headers['x-access-token'];
+    console.log(token + 'token do athorize')
     if (!token) {
         res.status(401).json({
             message: 'Restrict acess'
@@ -64,7 +64,7 @@ exports.isAdmin = (req, res, next) => {
 
 exports.isUser = (req, res, next) => {
     let token = req.body.token || req.body || req.body.acess_token || req.query.token || req.headers['x-access-token'];
-    console.log(token)
+    console.log(token + 'TOKEN QUE PEGA NO ISUSER')
     if(!token) {
         res.status(401).json({
             message: 'Invalid Token1'
@@ -72,11 +72,12 @@ exports.isUser = (req, res, next) => {
     } else { //se um callback for fornecido, a função verify() atua assincorna. Neste caso o callback esta sendo passado como uma funcao (error, decoded). Acho que por isso nao precisa de async/await
         jwt.verify(token, global.SALT_KEY, (error, decoded) => {
             if (error) {   
-                console.log(error)                        // ^ esse é o nosso token decodificado pela função autehnticate no customer-controller
+                console.log(error + 'ERRO DO JWT.VERIFY')                        // ^ esse é o nosso token decodificado pela função autehnticate no customer-controller
                 res.status(401).json({
                     message: 'Invalid Token2'
                 });
             } else {
+                console.log(decoded + 'DECODED')
                 if (decoded.roles.includes('user')) { //verifica se a string "admin" ta dentro do array que foi gerado pela propriedade "roles" no schema do customer-model
                     next();
                 } else {

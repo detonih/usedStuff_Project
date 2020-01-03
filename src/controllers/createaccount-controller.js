@@ -16,7 +16,7 @@ exports.post = async (req, res, next) => {
             password: md5(getPassword + global.SALT_KEY),
             roles: ['user']
         }).then(() => {
-            res.redirect('/index'); //redirecionar depois pra tela do perfil onde tera delete e put do user
+            res.redirect('/login'); //redirecionar depois pra tela do perfil ou login onde tera delete e put do user
         });
 
         /* res.status(200).send({
