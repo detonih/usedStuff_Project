@@ -27,25 +27,27 @@ exports.authenticate = async (req, res, next) => {
             roles: user.roles
         });
 
-        res.status(200).send({
+        
+        await res.redirect('profile')
+        
+        console.log(token)
+        //return res.render(token)
+        
+        await res.status(200).send({
             token: token,
             data: {
-            email: user.email,
-            name: user.name,
-            id: user.id
+                email: user.email,
+                name: user.name,
+                id: user.id
             }
         });
         
-        //res.redirect('profile')
-       
-        
-        
-        console.log(token)
 
     } catch (e) {
         console.log(e)
         res.status(500).send({
             message: "Login fail"
         });
-    };
+    };   
+
 };
