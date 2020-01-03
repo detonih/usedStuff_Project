@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     res.render('createaccount')
 });
 
-router.get('/users', controller.get);
+
 router.post('/', controller.post);
 //router.put('/', controller.put);
 

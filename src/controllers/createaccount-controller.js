@@ -1,19 +1,7 @@
 'use strict'
 
 const repository = require('../repositories/createaccount-repository');
-const saltHashPassword = require('../services/hash-password');
-
-exports.get = async (req, res, next) => {
-    try {
-        const data = await repository.get();
-        res.status(200).send(data);
-    } catch (e) {
-        console.log(e)
-        res.status(500).send({
-            message: 'Fail while searching users'
-        });
-    }
-};
+const md5 = require('md5');
 
 exports.post = async (req, res, next) => {
         const getName = req.body.name_register;
@@ -25,12 +13,11 @@ exports.post = async (req, res, next) => {
         await repository.create({
             name: getName,
             email: getEmail,
-            password: saltHashPassword(getPassword),
+            password: md5(getPassword + global.SALT_KEY),
             roles: ['user']
         }).then(() => {
             res.redirect('/index'); //redirecionar depois pra tela do perfil onde tera delete e put do user
         });
-        console.log(saltHashPassword(getPassword))
 
         /* res.status(200).send({
             message: 'User registered sucessfully!'

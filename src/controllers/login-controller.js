@@ -1,17 +1,16 @@
 'use strict'
 
 const repository = require('../repositories/login-repository');
-const saltHashPassword = require('../services/hash-password');
 const authService = require('../services/auth-service');
+const md5 = require('md5');
 
 exports.authenticate = async (req, res, next) => {
     const getEmail = req.body.email_login;
     const getPassword = req.body.password_login;
-    console.log(getEmail, getPassword)
     try {
         const user = await repository.authenticate({
             email: getEmail,
-            password: saltHashPassword(getPassword)
+            password: md5(getPassword + global.SALT_KEY)
         });
 
         if(!user) {
@@ -22,15 +21,23 @@ exports.authenticate = async (req, res, next) => {
         }
 
         const token = await authService.generateToken({
-            email: user.email_login,
-        });
+            email: user.email,
+            name: user.name,
+            id: user._id,
+            roles: user.roles
+        })/* .then(() => {
+            res.redirect('/profile');
+        }); */
 
+        console.log(token)
         res.status(200).send({
             token: token,
             data: {
-            email: user.email_login,
+            email: user.email,
+            name: user.name
             }
         });
+        //res.redirect('/profile');
 
     } catch (e) {
         console.log(e)

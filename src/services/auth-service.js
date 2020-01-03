@@ -1,15 +1,14 @@
-'use strict'
+'use strict';
 
-const saltHashPassword = require('../services/hash-password');
 const jwt = require('jsonwebtoken');
 
 exports.generateToken = async (data) => {
-    return jwt.sign(data, { expiresIn: '1d'});
-};            // ^ gera o token                ^ tempo de expiraçã 1 dia
+    return jwt.sign(data, global.SALT_KEY, { expiresIn: '1d'});
+};            
 
-//Recebe um token e cria uma variavel e verifica o token com a salt key
+//Recive token and verify
 exports.decodeToken = async (token) => {
-    let data = await jwt.verify(token, global.SALT_KEY); //aqui ta dizendo que o await nao tem efeito
+    let data = await jwt.verify(token, global.SALT_KEY); 
     return data;
 };
 
@@ -19,18 +18,18 @@ exports.authorize = (req, res, next) => {
 
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-    if (!token) {//se nao achou o token da acesso restrito
+    if (!token) {
         res.status(401).json({
             message: 'Restrict acess'
         });
-    } else { // se achou entra no processo de verificar o token
+    } else { 
         jwt.verify(token, global.SALT_KEY, (error, decoded) => {
-            if (error) {//se nao conseguir, seja pq inspirou ou é invalido
+            if (error) {
                 res.status(401).json({
                     message: 'Invalid Token'
                 });
             } else {
-                next(); //vai dar vazão na requisição, vai continuar
+                next(); 
             }
         });
     }
