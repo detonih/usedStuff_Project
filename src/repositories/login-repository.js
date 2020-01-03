@@ -1,6 +1,6 @@
 'use strict'
 
-const User = require('../models/createaccount-model');
+const User = require('../models/user-model');
 
 //Find the data on the DB
 exports.authenticate = async (data) => {

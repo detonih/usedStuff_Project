@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose');
-const User = require('../models/createaccount-model')
+const User = require('../models/user-model')
 
 exports.create = async (data) => {
     const user = new User.User(data);
