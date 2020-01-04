@@ -28,7 +28,7 @@ exports.authenticate = async (req, res, next) => {
         });
         console.log(token + ' token login contrler');
                 
-        await res.render('profile');
+        //await res.redirect('profile');
 
     } catch (e) {
         console.log(e + 'outro problem')
